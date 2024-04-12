@@ -1,6 +1,6 @@
 //contains code that uses sdk to connect to auth0
 
-import { AppState, Auth0Provider, User } from "@auth0/auth0-react";
+import { Auth0Provider } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
 type Props={
@@ -24,8 +24,7 @@ const audience=import.meta.env.VITE_AUTH0_AUDIENCE;
 //function is called when user gets redirected back to login page
 
 //as fn is out of auth provider it cant access useAuth0 hook
-  const onRedirectCallback=(appState?:AppState,user?:User)=>{
-   console.log("User ",user); 
+  const onRedirectCallback=()=>{
     navigate("/auth-callback");
   }
 
