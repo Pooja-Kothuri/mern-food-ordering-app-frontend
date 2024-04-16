@@ -82,12 +82,13 @@ const UserProfileForm=({onSave,isLoading,currentUser}:Props)=>{
                name= "addressLine1" 
               render={({field})=>(
                 <FormItem className="flex-1">
-                    <FormLabel>Address Line 1</FormLabel>
+                    <FormLabel>Address Line 1 </FormLabel>
                     <FormControl>
                         <Input {...field}  className="bg-white"/>
                     </FormControl>
                     <FormMessage/>
                 </FormItem>
+                
             )}
             />
 
@@ -106,15 +107,15 @@ const UserProfileForm=({onSave,isLoading,currentUser}:Props)=>{
 
             <FormField control={form.control} 
                name="country" 
-              render={({field})=>(
-                <FormItem className="flex-1">
+               render={({field})=>{ //console.log(field)
+              return ( <FormItem className="flex-1">
                     <FormLabel>Country</FormLabel>
                     <FormControl>
                         <Input {...field}  className="bg-white"/>
                     </FormControl>
                     <FormMessage/>
-                </FormItem>
-            )}
+                </FormItem> )
+              }}
             />
             </div>
              {isLoading ? <LoadingButton/>:(<Button type="submit" className="bg-orange-500">submit</Button>)}

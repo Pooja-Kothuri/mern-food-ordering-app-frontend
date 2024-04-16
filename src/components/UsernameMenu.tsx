@@ -17,15 +17,19 @@ const UsernameMenu = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
             <DropdownMenuItem>
-                {/* //adds padding to each item */}
+                
                 <Link to="/userprofile" className="font-bold  hover:text-orange-500">User Profile</Link>
+            </DropdownMenuItem>
+            <Separator/>
+            <DropdownMenuItem>
+                <Link to="/manage-restaurant" className="font-bold  hover:text-orange-500">My Restaurant</Link>
             </DropdownMenuItem>
             <Separator/>
             <DropdownMenuItem>
                 <Button 
                 className="flex flex-1 font-bold bg-orange-500"
                 onClick={()=>logout()}
-                >Logout</Button>
+                >LogOut</Button>
             </DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
