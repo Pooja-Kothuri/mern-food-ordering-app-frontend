@@ -1,10 +1,13 @@
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { FormControl, FormDescription, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
  
 
 const ImageSection = () => {
-  const {control} =useFormContext();
+  const {control,watch} =useFormContext();//using watch we can access image url even though  it is not  part of form
+  const existingImageUrl=watch("imageFile");//accessing cloudinary image url
+
   return (
     <div className="space-y-2">
         <div >
@@ -14,7 +17,10 @@ const ImageSection = () => {
           search results. Adding a new image will overwrite the existing one. 
             </FormDescription>
         </div>
-        <div className="flex flex-col gap-8 w-[50%]">
+        <div className="flex flex-col gap-8 md:w-[50%]">
+          {existingImageUrl && <AspectRatio ratio={16/9}>
+            <img src={existingImageUrl} className="rounded md:object-cover h-full w-full"/>
+            </AspectRatio>}
             <FormField control={control} name="imageFile" render={({field})=>(
                 <FormItem>
                     <FormControl>

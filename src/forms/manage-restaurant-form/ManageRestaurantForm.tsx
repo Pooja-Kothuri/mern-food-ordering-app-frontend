@@ -10,7 +10,10 @@ import ImageSection from "./ImageSection";
 import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Restaurant } from "@/types";
+import { useEffect } from "react";
 type Props={
+  restaurant?:Restaurant;
     onSave:(restaurantFormData:FormData)=>void;
     isLoading:boolean;
 };
@@ -40,13 +43,17 @@ const formSchema=z.object({
         name:z.string().min(1,"name is requied"),
         price:z.coerce.number().min(1,"price is requied"),
     })),
-    imageFile:z.instanceof(File,{message:"image is required"}),
+    imageUrl:z.string().optional(),
+    imageFile:z.instanceof(File,{message:"image is required"}).optional(),
     
-});
+}).refine((data)=>data.imageUrl ||data.imageFile,{
+  message: "Either image URL or image  File must be provided",
+  path:["imageFile"],
+})
 
 type RestaurantFormData=z.infer<typeof formSchema>
 
-const ManageRestaurantForm = ({onSave,isLoading}:Props) => {
+const ManageRestaurantForm = ({onSave,isLoading,restaurant}:Props) => {
    const form=useForm<RestaurantFormData>( {
       resolver:zodResolver(formSchema),
       defaultValues:{
@@ -55,6 +62,25 @@ const ManageRestaurantForm = ({onSave,isLoading}:Props) => {
       }
    });//managed by react hook and validated by zod
 
+
+
+   useEffect(()=>{ 
+    if(!restaurant){
+      return;
+    }
+    const deliveryPriceFormatted=parseInt((restaurant.deliveryPrice/100).toFixed(2))
+
+    const menuItemsFormatted=restaurant.menuItems.map((item)=>({
+      ...item,price:parseInt((item.price/100).toFixed(2))
+    }));
+
+    const updatedRestaurant={
+      ...restaurant,
+      deliveryPrice:deliveryPriceFormatted,
+      menuItems:menuItemsFormatted,
+    };
+    form.reset(updatedRestaurant);
+   },[form,restaurant]);
    //when form is submitted handleSubmit fn of form is called ,then zod validator validates the form ,if form is validated onSubmit fn is called else errors are displayed
    const onSubmit=(formDataJson:RestaurantFormData)=>{
    //TODO - convert formDataJSON to new formData obj

@@ -5,6 +5,7 @@ import AuthCallbackPage from "./pages/AuthCallbackPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import ManageRestaurantPage from "./pages/ManageRestaurantPage";
+import SearchPage from "./pages/SearchPage";
 //Routes contains group of routes
 const AppRoutes=()=>{
     return(
@@ -15,12 +16,13 @@ const AppRoutes=()=>{
   
            </Route>
            <Route path="/manage-restaurant" element={<Layout><ManageRestaurantPage/></Layout>}></Route>
-
+           
            <Route path="/auth-callback" element={<AuthCallbackPage/>}></Route>
+           <Route path="/search/:city" element={<Layout  showBgImg={false}><SearchPage/></Layout>}></Route>
            <Route path="/about" element={<span>about PAGE</span>}></Route>
            <Route path="*" element={<Navigate to="/"/>}></Route>
         </Routes>
-    )
+    ) 
 };
 
-export default AppRoutes;
+export default AppRoutes; 
