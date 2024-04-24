@@ -10,7 +10,6 @@ import {MenuItem as MenuItemType} from "../types"
 import CheckOutButton from "@/components/CheckOutButton";
 import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
 import { useCreateCheckoutSession } from "@/api/OrderApi";
-import { createTracing } from "trace_events";
 
 export type CartItem={
    _id:string;
