@@ -5,7 +5,7 @@ import { ChangeEvent } from "react";
 import { Button } from "./ui/button";
 
 type Props={
-    onChange:(cuisines:string[])=>void;
+    onChange:(cuisines:string[]) =>void;
     selectedCuisines:string[];
     isExpanded:boolean;
     onExpandedClick:()=>void;

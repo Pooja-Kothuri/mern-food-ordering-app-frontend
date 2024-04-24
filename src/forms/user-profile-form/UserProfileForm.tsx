@@ -17,16 +17,17 @@ const formSchema=z.object({
     country:z.string().min(1,"country is required"),
 });
 //zod framework is going to automatically detect property and type based on defined schema
-type UserFormData=z.infer<typeof formSchema>
+export type UserFormData=z.infer<typeof formSchema>
 
 type Props={
-   
     onSave:(userProfileData: UserFormData)=> void;
     isLoading:boolean;
     currentUser:User;
+    title?:string;
+    buttonText?:string;
 } 
 //form field is a controlled component so default value has to be provided for each field
-const UserProfileForm=({onSave,isLoading,currentUser}:Props)=>{
+const UserProfileForm=({onSave,isLoading,currentUser,title="User Profile",buttonText="Submit"}:Props)=>{
     const form=useForm<UserFormData>({
         resolver:zodResolver(formSchema),//tp handle validation 
         defaultValues:currentUser,
@@ -44,7 +45,7 @@ const UserProfileForm=({onSave,isLoading,currentUser}:Props)=>{
             <form onSubmit={form.handleSubmit(onSave)} className="space-y-4 bg-gray-50 rounded-lg md:p-10">
               <div>
               <h2 className="text-2xl font-bold">
-                User Profile Form
+                {title}
               </h2>
               <FormDescription>
                  view and change your profile information here 
@@ -118,7 +119,7 @@ const UserProfileForm=({onSave,isLoading,currentUser}:Props)=>{
               }}
             />
             </div>
-             {isLoading ? <LoadingButton/>:(<Button type="submit" className="bg-orange-500">submit</Button>)}
+             {isLoading ? <LoadingButton/>:(<Button type="submit" className="bg-orange-500">{buttonText}</Button>)}
 
 
 
