@@ -7,6 +7,7 @@ const MobileNavLinks = () => {
     const {logout} =useAuth0();
   return (
     <>
+    <Link to="/order-status " className="flex font-bold text-xl hover:text-orange-500 justify-center" >Order Status</Link>
     <Link to="/userprofile " className="flex font-bold text-xl hover:text-orange-500 justify-center" >user profile</Link>
     <Link to="/manage-restaurant " className="flex font-bold text-xl hover:text-orange-500 justify-center" >Manage Restaurant </Link>
     <Button 

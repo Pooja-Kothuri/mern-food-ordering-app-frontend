@@ -46,9 +46,11 @@ const formSchema=z.object({
     imageUrl:z.string().optional(),
     imageFile:z.instanceof(File,{message:"image is required"}).optional(),
     
-}).refine((data)=>data.imageUrl ||data.imageFile,{
+}).refine((data)=>{  console.log("imgurl: ",data.imageUrl ," imageFile ",data.imageFile);
+   return  data.imageUrl ||data.imageFile},{
   message: "Either image URL or image  File must be provided",
   path:["imageFile"],
+  
 })
 
 type RestaurantFormData=z.infer<typeof formSchema>
@@ -73,8 +75,8 @@ const ManageRestaurantForm = ({onSave,isLoading,restaurant}:Props) => {
     const menuItemsFormatted=restaurant.menuItems.map((item)=>({
       ...item,price:parseInt((item.price/100).toFixed(2))
     }));
-
-    const updatedRestaurant={
+    console.log(restaurant);
+    const updatedRestaurant={ 
       ...restaurant,
       deliveryPrice:deliveryPriceFormatted,
       menuItems:menuItemsFormatted,

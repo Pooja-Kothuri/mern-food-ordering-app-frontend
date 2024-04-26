@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 
 const ImageSection = () => {
   const {control,watch} =useFormContext();//using watch we can access image url even though  it is not  part of form
-  const existingImageUrl=watch("imageFile");//accessing cloudinary image url
+  const existingImageUrl=watch("imageUrl");//accessing cloudinary image url
 
   return (
     <div className="space-y-2">
