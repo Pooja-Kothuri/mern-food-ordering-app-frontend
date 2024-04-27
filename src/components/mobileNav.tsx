@@ -17,7 +17,7 @@ const MobileNav=()=>{
                     <span className="flex gap-2 text-xl items-center justify-center"><CircleUserRound className="text-orange-500"/>
                     {user?.name}
                     </span>
-                    :<span className="tracking-wide">Welcome to EasyBuy & Eat!</span> }
+                    :<span className="tracking-wide">Welcome to Taste Hub</span> }
                      
                 </SheetTitle>
                 <Separator />
